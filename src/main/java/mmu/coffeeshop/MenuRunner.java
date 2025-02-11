@@ -14,6 +14,7 @@ public class MenuRunner implements TextDisplay {
             Scanner scanner = new Scanner(System.in);
             int option = scanner.nextInt();
             currentMenu = currentMenu.chooseOption(option);
+            scanner.close();
         }
     }
 

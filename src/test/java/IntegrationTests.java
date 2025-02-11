@@ -64,4 +64,32 @@ public class IntegrationTests {
 
         Assert.assertEquals(149, basket.getTotalPrice());
     }
+
+
+    @Test
+    public void WhenAddItemIndexThatDoesNotExist() {
+        Basket basket = new Basket();
+        Menu mainMenu = new MainMenu(basket, new NullTextDisplay());
+        Menu addItemMenu = mainMenu.chooseOption(1);
+        addItemMenu.chooseOption(3);                // Hot Chocolate
+        addItemMenu.chooseOption(4);                // Not real
+
+        Assert.assertEquals(299, basket.getTotalPrice());
+        Assert.assertEquals(1, basket.getItemCount());
+    }
+
+
+    @Test
+    public void WhenRemoveItemIndexThatDoesNotExist() {
+        Basket basket = new Basket();
+        Menu mainMenu = new MainMenu(basket, new NullTextDisplay());
+        Menu addItemMenu = mainMenu.chooseOption(1);
+        addItemMenu.chooseOption(3);                // Hot Chocolate
+        addItemMenu.chooseOption(2);                // Tea
+        Menu removeItemMenu = mainMenu.chooseOption(2);
+        mainMenu = removeItemMenu.chooseOption(3);      // Remove coffee
+
+        Assert.assertEquals(448, basket.getTotalPrice());
+        Assert.assertEquals(2, basket.getItemCount());
+    }
 }
